@@ -17,9 +17,7 @@ Java Thread 與 Kotlin Coroutines 比較
 使用 lifecycleScope.launch 啟動水果資料載入流程，delay(1000) 模擬載入等待。
 等待期間不會阻塞 UI 主執行緒，完成後才更新 Spinner、GridView 與 ListView。
 
-本次 Lab08：
-使用 lifecycleScope.launch 執行聯絡人新增流程，delay(1000) 模擬新增處理。
-等待期間按鈕顯示處理中並停用，完成後透過 Activity Result 將資料回傳 MainActivity。
+
 
 注意：
 delay 本身只是示範非阻塞式暫停，並不會自動把 CPU 密集工作移到背景執行緒。
