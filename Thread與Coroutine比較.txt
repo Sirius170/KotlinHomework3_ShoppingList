@@ -1,0 +1,26 @@
+Java Thread 與 Kotlin Coroutines 比較
+
+1. 執行單位
+   Java Thread 是作業系統管理的執行緒；Coroutine 是由協程框架管理的輕量級工作單位。
+2. 建立方式
+   Java 常見寫法為 new Thread(...).start()；Kotlin 可使用 CoroutineScope.launch { ... }。
+3. 延遲方式
+   Thread.sleep(1000) 會阻塞呼叫它的執行緒；delay(1000) 只暫停目前 Coroutine，不會阻塞執行緒。
+4. 資源使用
+   Thread 建立與切換的成本通常較高；Coroutine 可以在較少執行緒上管理大量工作。
+5. 生命週期與取消
+   Thread 通常需要自行管理停止與清理；Android 可搭配 lifecycleScope，Activity 結束時取消其 Coroutine。
+6. 適用情境
+   Thread 可用於需要直接管理執行緒的情境；Coroutine 適合 Android 非同步工作，例如網路請求、延遲處理與資料載入。
+
+本次 Lab07：
+使用 lifecycleScope.launch 啟動水果資料載入流程，delay(1000) 模擬載入等待。
+等待期間不會阻塞 UI 主執行緒，完成後才更新 Spinner、GridView 與 ListView。
+
+本次 Lab08：
+使用 lifecycleScope.launch 執行聯絡人新增流程，delay(1000) 模擬新增處理。
+等待期間按鈕顯示處理中並停用，完成後透過 Activity Result 將資料回傳 MainActivity。
+
+注意：
+delay 本身只是示範非阻塞式暫停，並不會自動把 CPU 密集工作移到背景執行緒。
+若要執行大量運算或阻塞式 I/O，應另外使用 withContext(Dispatchers.Default/IO)。
